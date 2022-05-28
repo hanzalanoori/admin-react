@@ -8,15 +8,22 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
 
-export default function Comment() {
+export default function Comment(props) {
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <>
+    { props.data.map((com) => (
+       <div className="col-4 mb-4">       
+       
+   
+    <List sx={{ bgcolor: 'background.paper' }}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" sx={{backgroundColor:'indigo'}}/>
+          <Avatar alt="Remy Sharp"  sx={{backgroundColor:'indigo'}}>
+          {com.name[0].toUpperCase()}
+        </Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary="Lorem Ipsum"
+          primary={com.name}
           secondary={
             <React.Fragment>
               <Typography
@@ -27,55 +34,15 @@ export default function Comment() {
               >
                 Ali Connors
               </Typography>
-              {" Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
+              {com.body}
             </React.Fragment>
           }
         />
       </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" sx={{backgroundColor:'black'}}/>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Lorem Ipsum"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Ali Connors
-              </Typography>
-              {" Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" sx={{backgroundColor:'teal'}}/>
-        </ListItemAvatar>
-        <ListItemText
-          primary="Lorem Ipsum"
-          secondary={
-            <React.Fragment>
-              <Typography
-                sx={{ display: 'inline' }}
-                component="span"
-                variant="body2"
-                color="text.primary"
-              >
-                Ali Connors
-              </Typography>
-              {" Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-    </List>
+         </List>
+        
+      </div> 
+         ))}
+  </>
   );
 }

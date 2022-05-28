@@ -2,14 +2,32 @@ import {Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import App from "../../component/app";
 import Carddiv from "../../component/card";
+import Comment from "../../component/comment";
 import StandardImageList from "../../component/image";
 import Pie from "../../component/pie";
-import CustomizedTables from "../../component/table";
 import MediaControlCard from "../../component/uicontrol";
-import AlignItemsList from "./list";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+
 
 
 function Home(props){
+
+const [comments,setComments] = useState([]);
+
+useEffect(() => {
+  axios
+    .get(`https://jsonplaceholder.typicode.com/comments`,{
+      params: {
+        _limit: 6
+       }
+    })
+    .then(res => setComments(res.data))
+    .catch(err => console.error(err));
+  
+})
+
+
 return <>
 <div className="">
     <div className="row">
@@ -50,9 +68,7 @@ return <>
     </div>
 
     <div className="row mt-4">
-    <div className="col-lg-12 col-12">
-    <AlignItemsList  />
-    </div> 
+    <Comment data={comments}  />
              
     </div>
    

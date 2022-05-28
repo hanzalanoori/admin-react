@@ -36,24 +36,27 @@ export default function CustomizedTables(props) {
         <TableHead>
           <TableRow>
             <StyledTableCell>Name</StyledTableCell>
+            <StyledTableCell align="right">UserName</StyledTableCell>
             <StyledTableCell align="right">Email</StyledTableCell>
             <StyledTableCell align="right">Phone Number</StyledTableCell>
-            <StyledTableCell align="right">Address</StyledTableCell>
-            <StyledTableCell align="right">Post Address</StyledTableCell>
+            <StyledTableCell align="right">Website</StyledTableCell>
+         
           </TableRow>
         </TableHead>
         <TableBody>
           {props.rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          
+            <StyledTableRow>
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
+              <StyledTableCell align="right">{row.username}</StyledTableCell>
               <StyledTableCell align="right">{row.email}</StyledTableCell>
               <StyledTableCell align="right">{row.phone}</StyledTableCell>
-              <StyledTableCell align="right">{row.address}</StyledTableCell>
-              <StyledTableCell align="right">{row.mail}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+              <StyledTableCell align="right">{row.website}</StyledTableCell>
+                 
+             </StyledTableRow>
+           ))}
         </TableBody>
       </Table>
     </TableContainer>
