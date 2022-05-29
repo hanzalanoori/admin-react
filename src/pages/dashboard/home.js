@@ -40,7 +40,7 @@ return <>
          <App />
         </div> 
         <div className="col-6 mb-4">
-         <Pie />
+         <Pie data={comments}/> 
         </div>
                   
     </div>

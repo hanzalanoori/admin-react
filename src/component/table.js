@@ -36,24 +36,32 @@ export default function CustomizedTables(props) {
         <TableHead>
           <TableRow>
             <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell align="right">UserName</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">Phone Number</StyledTableCell>
-            <StyledTableCell align="right">Website</StyledTableCell>
+            <StyledTableCell align="left">UserName</StyledTableCell>
+            <StyledTableCell align="left">Email</StyledTableCell>
+            <StyledTableCell align="left">Phone Number</StyledTableCell>
+            <StyledTableCell align="left">Website</StyledTableCell>
+            <StyledTableCell align="left">Address</StyledTableCell>
+            <StyledTableCell align="left">Geo Location</StyledTableCell>
          
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.rows.map((row) => (
+          {props.rows.map((row,Index) => (
           
             <StyledTableRow>
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.username}</StyledTableCell>
-              <StyledTableCell align="right">{row.email}</StyledTableCell>
-              <StyledTableCell align="right">{row.phone}</StyledTableCell>
-              <StyledTableCell align="right">{row.website}</StyledTableCell>
+              <StyledTableCell align="left">{row.username}</StyledTableCell>
+              <StyledTableCell align="left">{row.email}</StyledTableCell>
+              <StyledTableCell align="left">{row.phone}</StyledTableCell>
+              <StyledTableCell align="left">{row.website}</StyledTableCell>
+              <StyledTableCell align="left">{row.address.suite}<br></br>
+              {row.address.street}<br></br>
+              {row.address.city}<br></br>
+              {row.address.zipcode}</StyledTableCell>
+              <StyledTableCell align="left">{row.address.geo.lat}<br></br>
+              {row.address.geo.lng}</StyledTableCell>
                  
              </StyledTableRow>
            ))}
