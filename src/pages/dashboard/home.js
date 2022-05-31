@@ -13,20 +13,60 @@ import React, { useState, useEffect } from "react";
 
 function Home(props){
 
-const [comments,setComments] = useState([]);
 
-useEffect(() => {
-  axios
-    .get(`https://jsonplaceholder.typicode.com/comments`,{
-      params: {
-        _limit: 6
-       }
-    })
-    .then(res => setComments(res.data))
-    .catch(err => console.error(err));
-  
-})
-
+    const [comments,setComments] = useState([]);
+    const [series,setSeries] = useState([
+      {
+        name: "series-1",
+        data: []
+      }
+    ]);
+    const [options,setOptions] = useState({
+      chart: {
+        id: "line"
+      },
+      xaxis: {
+        categories: []
+      }
+    });
+    
+    
+        useEffect(() => {
+          const number = [];
+          const id = [];
+    
+          axios
+            .get(`https://jsonplaceholder.typicode.com/comments`,{
+              params: {
+                _limit: 9
+               }
+            })
+            .then(res => { 
+              setComments(res.data)
+              res.data.map((e) => {
+                number.push(e.postId)
+                id.push(e.id)
+              })
+              setOptions({
+                chart: {
+                  id: "line"
+                },
+                xaxis: {
+                  categories: id
+                }
+              })
+    
+              setSeries([
+                {
+                  name: "series-1",
+                  data: number
+                }
+              ])
+            })
+            .catch(err => console.error(err));
+          
+ })
+    
 
 return <>
 <div className="">
@@ -37,7 +77,7 @@ return <>
     </div>
     <div className="row mt-4">
         <div className="col-6 mb-4">
-         <App />
+         <App series={series} options={options}  type="line" />
         </div> 
         <div className="col-6 mb-4">
          <Pie data={comments}/> 

@@ -13,17 +13,63 @@ import React, { useState, useEffect } from "react";
 function Analytics(){
 
 
+
 const [comments,setComments] = useState([]);
+
+const [series,setSeries] = useState([
+  {
+    name: "series-1",
+    data: []
+  }
+]);
+const [options,setOptions] = useState({
+  chart: {
+    id: "basic-bar"
+  },
+  xaxis: {
+    categories: []
+  }
+});
 
 
     useEffect(() => {
+      const number = [];
+      const id = [];
+
       axios
         .get(`https://jsonplaceholder.typicode.com/comments`,{
           params: {
             _limit: 6
            }
         })
-        .then(res => setComments(res.data))
+        .then(res => { 
+          setComments(res.data)
+          res.data.map((e) => {
+            number.push(e.postId)
+            id.push(e.id)
+          })
+          setOptions({
+            chart: {
+              id: "basic-bar"
+            },
+            xaxis: {
+              categories: []
+            }
+          })
+
+          setSeries([
+            {
+              name: "series-1",
+              data: id
+            },{
+              name: "series-1",
+              data: id
+            },{
+              name: "series-1",
+              data: id
+            }
+          ])
+        })
         .catch(err => console.error(err));
       
     })
@@ -33,7 +79,7 @@ return <>
 <div className="">
     <div className="row">
         <div className="col-6 mb-4">
-         <App data={comments} />
+         <App series={series} options={options} type="bar" />
         </div> 
 
         
