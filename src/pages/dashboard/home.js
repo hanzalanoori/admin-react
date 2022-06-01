@@ -30,42 +30,44 @@ function Home(props){
       }
     });
     
-    
+    const api = () =>{
+      const number = [];
+      const id = [];
+
+      axios
+        .get(`https://jsonplaceholder.typicode.com/comments`,{
+          params: {
+            _limit: 9
+           }
+        })
+        .then(res => { 
+          setComments(res.data)
+          res.data.map((e) => {
+            number.push(e.postId)
+            id.push(e.id)
+          })
+          setOptions({
+            chart: {
+              id: "line"
+            },
+            xaxis: {
+              categories: id
+            }
+          })
+
+          setSeries([
+            {
+              name: "series-1",
+              data: number
+            }
+          ])
+        })
+        .catch(err => console.error(err));
+    }
+
         useEffect(() => {
-          const number = [];
-          const id = [];
-    
-          axios
-            .get(`https://jsonplaceholder.typicode.com/comments`,{
-              params: {
-                _limit: 9
-               }
-            })
-            .then(res => { 
-              setComments(res.data)
-              res.data.map((e) => {
-                number.push(e.postId)
-                id.push(e.id)
-              })
-              setOptions({
-                chart: {
-                  id: "line"
-                },
-                xaxis: {
-                  categories: id
-                }
-              })
-    
-              setSeries([
-                {
-                  name: "series-1",
-                  data: number
-                }
-              ])
-            })
-            .catch(err => console.error(err));
-          
- })
+        api(); 
+        },[])
     
 
 return <>

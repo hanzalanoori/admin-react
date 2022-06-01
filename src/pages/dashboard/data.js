@@ -13,7 +13,7 @@ function Data(){
 
 const [comments,setComments] = useState([]);
 
-useEffect(() => {
+const api = () =>{
   axios
     .get(`https://jsonplaceholder.typicode.com/comments`,{
       params: {
@@ -23,7 +23,11 @@ useEffect(() => {
     .then(res => setComments(res.data))
     .catch(err => console.error(err));
   
-})
+}
+
+useEffect(() => {
+  api();
+},[])
 
 
 

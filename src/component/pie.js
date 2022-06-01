@@ -39,11 +39,16 @@ function Pie(props){
   const [labels,setLabels] = useState(null)
   const [options,setOtions] = useState({})
 
-  
-  useEffect(() => {
+
+  const data = () => {
     setSeries(props.data.map((e) => e.postId,))
     setLabels(props.data.map((e) => `${e.name}`,))
-  })
+  }
+
+  
+  useEffect(() => {
+    data();
+    },[series])
 
 
 

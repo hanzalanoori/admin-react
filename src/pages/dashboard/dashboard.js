@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Analytics from './analytics';
 import Data from './data';
 import SpeedDial from '@mui/material/SpeedDial';
@@ -52,6 +52,12 @@ function Dashboard(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const navigate = useNavigate();
+
+  const routing = (routees) =>{
+     navigate(routees);
+  }
+
 
   const pageLink = [{
     name : 'Home',
@@ -72,8 +78,7 @@ function Dashboard(props) {
       <Toolbar  />
       <List  color='primary' sx={{backgroundColor:'#1876d2'}}>
         {pageLink.map((text, index) => (
-          <Link to={text.url} >
-          <ListItem key={text.name} disablePadding>
+          <ListItem key={text.name} onClick={(e) => routing(text.url)} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon sx={{color:'#fff'}} /> : <MailIcon sx={{color:'#fff'}} />}
@@ -81,7 +86,6 @@ function Dashboard(props) {
               <ListItemText primary={text.name} sx={{color:'#fff'}} />
             </ListItemButton>
           </ListItem>
-          </Link>
         ))}
       </List>
      

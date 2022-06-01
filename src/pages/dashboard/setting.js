@@ -9,10 +9,15 @@ function Setting(){
 
   const [post, setPost] = useState([]);
 
-  useEffect(() => {
+  const api = () =>{
     axios.get(`https://jsonplaceholder.typicode.com/users`).then((response) => {
       setPost(response.data);
     });
+ 
+  }
+
+  useEffect(() => {
+  api(); 
   }, []);
 
 

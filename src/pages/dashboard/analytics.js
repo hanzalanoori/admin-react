@@ -22,6 +22,7 @@ const [series,setSeries] = useState([
     data: []
   }
 ]);
+
 const [options,setOptions] = useState({
   chart: {
     id: "basic-bar"
@@ -31,9 +32,8 @@ const [options,setOptions] = useState({
   }
 });
 
-
-    useEffect(() => {
-      const number = [];
+const api = () => {
+  const number = [];
       const id = [];
 
       axios
@@ -72,7 +72,12 @@ const [options,setOptions] = useState({
         })
         .catch(err => console.error(err));
       
-    })
+}
+
+
+    useEffect(() => {
+      api();
+    },[])
     
    
 return <>

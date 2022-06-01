@@ -9,7 +9,7 @@ export default function StandardImageList() {
 
   const [image, setImage] = useState([]);
 
-  useEffect(() => {
+  const api = () => {
     axios.get(`https://jsonplaceholder.typicode.com/photos`,{
       params: {
         _limit: 18
@@ -17,6 +17,10 @@ export default function StandardImageList() {
     }).then((response) => {
       setImage(response.data);
     });
+ }
+
+  useEffect(() => {
+    api();
   }, []);
   
 
